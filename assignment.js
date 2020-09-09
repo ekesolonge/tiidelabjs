@@ -31,7 +31,7 @@ if (data == 1) {
   if (user == 1) {
     amount = prompt("Enter Data amount(MB): ");
     alert(amount + "MB has been sent to you successfully");
-  } else if (user == 2){
+  } else if (user == 2) {
     number = prompt("Enter Recipient number: ");
     network = prompt(
       "Enter Network Provider:\n1. MTN\n2. GLO\n3. Airtel\n4. Etisalat"
@@ -42,20 +42,28 @@ if (data == 1) {
     } else {
       alert("Invalid provider selected");
     }
-  } else{
-      alert("Invalid option selected");
+  } else {
+    alert("Invalid option selected");
   }
 } else if (data == 4) {
   //Transfer
   number = prompt("Enter Account Number: ");
-  amount = prompt("Enter Amount to be transferred: ");
-  ans = confirm("Are you sure?");
-  if (ans == true) {
-    alert(
-      "#" + amount + " has been transferred to " + number + " successfully"
-    );
+  if (number != 0) {
+    amount = prompt("Enter Amount to be transferred: ");
+    if (amount != 0) {
+      ans = confirm("Are you sure?");
+      if (ans == true) {
+        alert(
+          "#" + amount + " has been transferred to account number " + number + " successfully"
+        );
+      } else {
+        alert("Transaction cancelled successfully");
+      }
+    } else {
+      alert("Invalid Amount");
+    }
   } else {
-    alert("Transaction cancelled successfully");
+    alert("Invalid Account Number");
   }
 } else {
   alert("Invalid package selected");
