@@ -62,8 +62,6 @@ if (data == 1) {
       ans = confirm("Are you sure you want to transfer #" + amount + " to the account number " + number + "?");
       if (ans) {
         alert("#" + amount + " has been successfully transferred to account number " + number +".");
-      } else {
-        alert("Transaction cancelled successfully.");
       }
     } else {
       alert("Invalid Amount.");
