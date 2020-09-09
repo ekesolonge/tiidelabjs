@@ -4,10 +4,10 @@ data = Number(
 // Airtime Self
 if (data == 1) {
   amount = prompt("Enter Amount: ");
-  if (amount >= 50 && amount <= 10000) {
-    alert("#" + amount + " has been recharged successfully");
+  if (amount >= 50 && amount <= 20000) {
+    alert("#" + amount + " has been recharged successfully.");
   } else {
-    alert("Invalid Amount");
+    alert("Invalid Amount.");
   }
 } else if (data == 2) {
   //Airtime Others
@@ -16,14 +16,14 @@ if (data == 1) {
   );
   if (network == 1 || network == 2 || network == 3 || network == 4) {
     amount = prompt("Enter Amount: ");
-    if (amount >= 50 && amount <= 10000) {
+    if (amount >= 50 && amount <= 20000) {
       number = prompt("Enter Mobile Number: ");
-      alert("#" + amount + " has been sent to " + number + " successfully");
+      alert("#" + amount + " has been sent to " + number + " successfully.");
     } else {
-      alert("Invalid Amount");
+      alert("Invalid Amount.");
     }
   } else {
-    alert("Invalid provider selected");
+    alert("Invalid Provider Selected.");
   }
 } else if (data == 3) {
   //Data
@@ -31,9 +31,9 @@ if (data == 1) {
   if (user == 1) {
     amount = prompt("Enter Data amount(MB): ");
     if (amount >= 10 && amount <= 100000) {
-      alert(amount + "MB has been sent to you successfully");
+      alert(amount + "MB has been sent to you successfully.");
     } else {
-        alert("Invalid Amount")
+      alert("Invalid Amount.");
     }
   } else if (user == 2) {
     number = prompt("Enter Recipient number: ");
@@ -43,15 +43,15 @@ if (data == 1) {
     if (network == 1 || network == 2 || network == 3 || network == 4) {
       amount = prompt("Enter Data amount(MB): ");
       if (amount >= 10 && amount <= 100000) {
-        alert(amount + "MB has been sent to " + number + " successfully");
+        alert(amount + "MB has been sent to " + number + " successfully.");
       } else {
-          alert("Invalid Amount")
+        alert("Invalid Amount");
       }
     } else {
-      alert("Invalid provider selected");
+      alert("Invalid Provider Selected.");
     }
   } else {
-    alert("Invalid option selected");
+    alert("Invalid Option Selected.");
   }
 } else if (data == 4) {
   //Transfer
@@ -59,24 +59,18 @@ if (data == 1) {
   if (number != 0) {
     amount = prompt("Enter Amount to be transferred: ");
     if (amount != 0) {
-      ans = confirm("Are you sure?");
-      if (ans == true) {
-        alert(
-          "#" +
-            amount +
-            " has been transferred to account number " +
-            number +
-            " successfully"
-        );
+      ans = confirm("Are you sure you want to transfer #" + amount + " to the account number " + number + "?");
+      if (ans) {
+        alert("#" + amount + " has been successfully transferred to account number " + number +".");
       } else {
-        alert("Transaction cancelled successfully");
+        alert("Transaction cancelled successfully.");
       }
     } else {
-      alert("Invalid Amount");
+      alert("Invalid Amount.");
     }
   } else {
-    alert("Invalid Account Number");
+    alert("Invalid Account Number.");
   }
 } else {
-  alert("Invalid package selected");
+  alert("Invalid package selected.");
 }
