@@ -4,85 +4,131 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Airtime Recharge</title>
+
+    <style>
+        body {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+            background-color: darkorchid;
+            height: 100vh;
+            font-family: monospace;
+        }
+
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        button {
+            display: block;
+            outline: none;
+            border: none;
+            border-radius: 10px;
+            background: rgba(15, 6, 71, 0.616);
+            height: 10rem;
+            width: 20rem;
+            color: white;
+            font-size: 3rem;
+            transition: all 300ms ease;
+        }
+
+        button:hover,button:focus{
+            background: rgba(76, 55, 214, 0.616);
+            transform: scale(1.5);
+            transition: all 300ms ease;
+        }
+        button:active{
+            background: rgba(23, 14, 82, 0.616);
+        }
+    </style>
 </head>
 
 <body>
+    <main>
+        <button id="btn">Recharge</button>
+    </main>
     <script>
-        data = Number(prompt("Welcome\n1. Airtime Self \n2. Airtime Others \n3. Data \n4. Transfer"));
-        
-        // Airtime Self
-        if (data == 1) {
-            amount = prompt("Enter Amount: ");
-            if (amount >= 50 && amount <= 20000) {
-                alert("#" + amount + " has been recharged successfully.");
-            } else {
-                alert("Invalid Amount (Min credit #50, Max credit #20000)");
-            }
-        } else if (data == 2) {
-            //Airtime Others
-            network = prompt(
-                "Enter Network Provider:\n1. MTN\n2. GLO\n3. Airtel\n4. Etisalat"
-            );
-            if (network == 1 || network == 2 || network == 3 || network == 4) {
+        var button = document.getElementById("btn");
+        button.addEventListener('click', function(){
+            data = Number(prompt("Welcome\n1. Airtime Self \n2. Airtime Others \n3. Data \n4. Transfer"));
+
+            // Airtime Self
+            if (data == 1) {
                 amount = prompt("Enter Amount: ");
                 if (amount >= 50 && amount <= 20000) {
-                    number = prompt("Enter Mobile Number: ");
-                    alert("#" + amount + " has been sent to " + number + " successfully.");
+                    alert("#" + amount + " has been recharged successfully.");
                 } else {
                     alert("Invalid Amount (Min credit #50, Max credit #20000)");
                 }
-            } else {
-                alert("Invalid Provider Selected.");
-            }
-        } else if (data == 3) {
-            //Data
-            user = Number(prompt("1. Self\n2. Other"));
-            if (user == 1) {
-                amount = prompt("Enter Data amount(MB): ");
-                if (amount >= 10 && amount <= 100000) {
-                    alert(amount + "MB has been sent to you successfully.");
-                } else {
-                    alert("Invalid Amount (Min data 10MB, Max data 100000MB)");
-                }
-            } else if (user == 2) {
-                number = prompt("Enter Recipient number: ");
+            } else if (data == 2) {
+                //Airtime Others
                 network = prompt(
                     "Enter Network Provider:\n1. MTN\n2. GLO\n3. Airtel\n4. Etisalat"
                 );
                 if (network == 1 || network == 2 || network == 3 || network == 4) {
-                    amount = prompt("Enter Data amount(MB): ");
-                    //Data must be between 10MB to 100GB
-                    if (amount >= 10 && amount <= 100000) {
-                        alert(amount + "MB has been sent to " + number + " successfully.");
+                    amount = prompt("Enter Amount: ");
+                    if (amount >= 50 && amount <= 20000) {
+                        number = prompt("Enter Mobile Number: ");
+                        alert("#" + amount + " has been sent to " + number + " successfully.");
                     } else {
-                        alert("Invalid Amount (Min data 10MB, Max data 100000MB)");
+                        alert("Invalid Amount (Min credit #50, Max credit #20000)");
                     }
                 } else {
                     alert("Invalid Provider Selected.");
                 }
-            } else {
-                alert("Invalid Option Selected.");
-            }
-        } else if (data == 4) {
-            //Transfer
-            number = prompt("Enter Account Number: ");
-            if (number != 0) {
-                amount = prompt("Enter Amount to be transferred: ");
-                if (amount >= 100 && amount <= 1000000) {
-                    ans = confirm("Are you sure you want to transfer #" + amount + " to the account number " + number + "?");
-                    if (ans) {
-                        alert("#" + amount + " has been successfully transferred to account number " + number + ".");
+            } else if (data == 3) {
+                //Data
+                user = Number(prompt("1. Self\n2. Other"));
+                if (user == 1) {
+                    amount = prompt("Enter Data amount(MB): ");
+                    if (amount >= 10 && amount <= 100000) {
+                        alert(amount + "MB has been sent to you successfully.");
+                    } else {
+                        alert("Invalid Amount (Min data 10MB, Max data 100000MB)");
+                    }
+                } else if (user == 2) {
+                    number = prompt("Enter Recipient number: ");
+                    network = prompt(
+                        "Enter Network Provider:\n1. MTN\n2. GLO\n3. Airtel\n4. Etisalat"
+                    );
+                    if (network == 1 || network == 2 || network == 3 || network == 4) {
+                        amount = prompt("Enter Data amount(MB): ");
+                        //Data must be between 10MB to 100GB
+                        if (amount >= 10 && amount <= 100000) {
+                            alert(amount + "MB has been sent to " + number + " successfully.");
+                        } else {
+                            alert("Invalid Amount (Min data 10MB, Max data 100000MB)");
+                        }
+                    } else {
+                        alert("Invalid Provider Selected.");
                     }
                 } else {
-                    alert("Invalid Amount (Min money #100, Max money #1,000,000)");
+                    alert("Invalid Option Selected.");
+                }
+            } else if (data == 4) {
+                //Transfer
+                number = prompt("Enter Account Number: ");
+                if (number != 0) {
+                    amount = prompt("Enter Amount to be transferred: ");
+                    if (amount >= 100 && amount <= 1000000) {
+                        ans = confirm("Are you sure you want to transfer #" + amount + " to the account number " + number + "?");
+                        if (ans) {
+                            alert("#" + amount + " has been successfully transferred to account number " + number + ".");
+                        }
+                    } else {
+                        alert("Invalid Amount (Min money #100, Max money #1,000,000)");
+                    }
+                } else {
+                    alert("Invalid Account Number.");
                 }
             } else {
-                alert("Invalid Account Number.");
+                alert("Invalid Package Selected.");
             }
-        } else {
-            alert("Invalid package selected.");
-        }
+        })
     </script>
 </body>
 
