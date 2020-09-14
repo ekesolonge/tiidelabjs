@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Functions</title>
+
+    <style>
+        body {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+            background-color: rgb(204, 50, 135);
+            height: 100vh;
+            font-family: monospace;
+        }
+
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        button {
+            display: block;
+            outline: none;
+            border: none;
+            border-radius: 10px;
+            background: rgb(240, 8, 66);
+            height: 8rem;
+            width: 16rem;
+            color: white;
+            font-size: 2rem;
+            transition: all 300ms ease;
+        }
+
+        button:hover,
+        button:focus {
+            background: rgb(141, 0, 35);
+            transform: scale(1.5);
+            transition: all 300ms ease;
+        }
+
+        button:active {
+            background: rgb(141, 0, 35);
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <button id="btn">Calculate</button>
+    </main>
+    <!-- Javascript -->
+    <script>
+        var button = document.getElementById("btn");
+        button.addEventListener('click', function () {
+            alert("Welcome to my Calculator!")
+            // Addition
+            function add(num1, num2) {
+                value = num1 + num2
+                alert(`Result:\n${num1} + ${num2} = ${value}`)
+            }
+            // Subtraction
+            function sub(num1, num2) {
+                value = num1 - num2
+                alert(`Result:\n${num1} - ${num2} = ${value}`)
+            }
+            // Multiplication
+            function mul(num1, num2) {
+                value = num1 * num2
+                alert(`Result:\n${num1} * ${num2} = ${value}`)
+            }
+            // Division
+            function div(num1, num2) {
+                value = num1 / num2
+                alert(`Result:\n${num1} / ${num2} = ${value}`)
+            }
+
+            a = Number(prompt('Enter First Number:'))
+
+            while (isNaN(a)) {
+                a = Number(prompt('Please Enter a Valid First Number:'))
+            }
+
+            b = Number(prompt('Enter Second Number:'))
+
+            while (isNaN(b)) {
+                b = Number(prompt('Please Enter a Valid Second Number:'))
+            }
+
+            operation = prompt(
+                "Select an Operation:\n1. Addition\n2. Subtraction\n3. Multiplication\n4. Division"
+            )
+
+            if (operation == 1) {
+                add(a, b)
+            } else if (operation == 2) {
+                sub(a, b)
+            } else if (operation == 3) {
+                mul(a, b)
+            } else if (operation == 4) {
+                div(a, b)
+            } else {
+                alert('Enter valid input')
+            }
+        })
+    </script>
+</body>
+
+</html>
