@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise</title>
+
+    <style>
+        body {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+            background: rgb(174, 232, 255);
+        }
+
+        main {
+            height: 100vh;
+            max-width: 1000px;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        table {
+            font-size: 18px;
+            background: rgb(128, 217, 252);
+            border: solid 1px rgb(2, 160, 223);
+        }
+
+        thead {
+            background: rgb(2, 160, 223);
+        }
+
+        input {
+            background: rgb(2, 160, 223);
+            border: none;
+            outline: none;
+            border-radius: 3px;
+            height: 40px;
+            width: 100px;
+            margin-top: 1rem;
+            padding: 0.5rem;
+            font-size: 17px;
+            transition: all ease 200ms;
+        }
+
+        input:hover {
+            background: rgb(1, 108, 150);
+            transition: all ease 200ms;
+        }
+
+
+        input:active {
+            background: rgb(2, 160, 223);
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <table cellpadding="10px" border="1px">
+            <thead>
+                <tr>
+                    <th>S/N</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone Number</th>
+                    <th>Location</th>
+                </tr>
+            </thead>
+
+            <tbody id="data"></tbody>
+        </table>
+
+        <input id="input" type="button" value="Add">
+    </main>
+    <script>
+        tiidelab = {
+            "SN": 1,
+            "name": "TIIDELab",
+            "email": "tiidelab@email.com",
+            "phoneNumber": "+2348023451248",
+            "location": "Nigeria"
+        }
+
+        apple = {
+            "SN": 2,
+            "name": "Apple",
+            "email": "apple@email.com",
+            "phoneNumber": "+1202958555325",
+            "location": "USA"
+        }
+
+        uber = {
+            "SN": 3,
+            "name": "Uber",
+            "email": "uber@email.com",
+            "phoneNumber": "+1475503381416",
+            "location": "London"
+        }
+
+        martreach = {
+            "SN": 4,
+            "name": "MartReach",
+            "email": "martreach@email.com",
+            "phoneNumber": "+2348064413466",
+            "location": "Abuja"
+        }
+
+        companies = [tiidelab, apple, uber, martreach]
+
+        cont = ``
+        for (i = 0; i < companies.length; i++) {
+            cont += `
+                <tr>
+                    <td>${i + 1}</td>
+                    <td>${companies[i].name}</td>
+                    <td>${companies[i].email}</td>
+                    <td>${companies[i].phoneNumber}</td>
+                    <td>${companies[i].location}</td>
+                </tr>`
+        }
+        document.getElementById('data').innerHTML = cont;
+
+        const add = () => {
+            companies.push({
+                "SN": companies.length + 1,
+                "name": prompt("Enter Company Name:"),
+                "email": prompt("Enter Email:"),
+                "phoneNumber": prompt("Enter Phone Number:"),
+                "location": prompt("Enter Location:")
+            })
+        }
+
+        document.getElementById('input').addEventListener('click', add)
+
+    </script>
+</body>
+
+</html>
