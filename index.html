@@ -60,7 +60,9 @@
 </head>
 
 <body>
+    <!-- Main section -->
     <main>
+        <!-- Table -->
         <table cellpadding="10px" border="1px">
             <thead>
                 <tr>
@@ -72,12 +74,17 @@
                 </tr>
             </thead>
 
-            <tbody id="data"></tbody>
+
+            <tbody id="data">
+                <!-- Where data will be inserted -->
+            </tbody>
         </table>
 
         <input id="input" type="button" value="Add">
     </main>
+
     <script>
+        // Object definitions
         tiidelab = {
             "SN": 1,
             "name": "TIIDELab",
@@ -110,10 +117,16 @@
             "location": "Abuja"
         }
 
+
+        // Putting objects in array
         companies = [tiidelab, apple, uber, martreach]
 
+        // Defining content
         cont = ``
+
+        // Loop to go through all the objects in the array
         for (i = 0; i < companies.length; i++) {
+            // Concatenating the table row into content
             cont += `
                 <tr>
                     <td>${i + 1}</td>
@@ -123,18 +136,40 @@
                     <td>${companies[i].location}</td>
                 </tr>`
         }
+        // targeting id in tbody and adding content in it.
         document.getElementById('data').innerHTML = cont;
 
+        // function to add more data to the array
         const add = () => {
-            companies.push({
+            newInput = {
                 "SN": companies.length + 1,
                 "name": prompt("Enter Company Name:"),
                 "email": prompt("Enter Email:"),
                 "phoneNumber": prompt("Enter Phone Number:"),
                 "location": prompt("Enter Location:")
-            })
+            }
+            companies.push(newInput)
+            display()
         }
 
+        // function to concatenate new objects added
+        const display = () => {
+
+            for (i = companies.length - 1; i < companies.length; i++) {
+                cont += `
+                 <tr>
+                    <td>${i + 1}</td>
+                    <td>${companies[i].name}</td>
+                    <td>${companies[i].email}</td>
+                    <td>${companies[i].phoneNumber}</td>
+                    <td>${companies[i].location}</td>
+                </tr>`
+
+            }
+            document.getElementById('data').innerHTML = cont;
+        }
+
+        // Click event for the button
         document.getElementById('input').addEventListener('click', add)
 
     </script>
