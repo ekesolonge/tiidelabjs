@@ -7,6 +7,7 @@
     <title>Exercise</title>
 
     <style>
+        /* Body */
         body {
             box-sizing: border-box;
             padding: 0;
@@ -14,8 +15,9 @@
             background: rgb(174, 232, 255);
         }
 
+        /* Main Section */
         main {
-            height: 100vh;
+            min-height: 100vh;
             max-width: 1000px;
             margin: auto;
             display: flex;
@@ -24,6 +26,7 @@
             flex-direction: column;
         }
 
+        /* Table Styling*/
         table {
             font-size: 18px;
             background: rgb(128, 217, 252);
@@ -34,6 +37,7 @@
             background: rgb(2, 160, 223);
         }
 
+        /* Button Styling */
         input {
             background: rgb(2, 160, 223);
             border: none;
@@ -155,13 +159,13 @@
             append()
         }
 
-        // function to add more data to the array
+        // function to delete data from the array
         const del = () => {
             companies.pop()
             remove()
         }
 
-        // function to append new objects added
+        // function to append newly added objects to HTML
         const append = () => {
 
             for (i = companies.length - 1; i < companies.length; i++) {
