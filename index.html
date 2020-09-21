@@ -156,18 +156,8 @@
                 "location": prompt("Enter Location:")
             }
             companies.push(newInput)
-            append()
-        }
 
-        // function to delete data from the array
-        const del = () => {
-            companies.pop()
-            remove()
-        }
-
-        // function to append newly added objects to HTML
-        const append = () => {
-
+            //appends new object to array
             for (i = companies.length - 1; i < companies.length; i++) {
                 cont += `
                  <tr>
@@ -182,11 +172,12 @@
             document.getElementById('data').innerHTML = cont;
         }
 
-        // function to display objects after delete
-        const remove = () => {
+        // function to delete data from the array
+        const del = () => {
+            companies.pop()
 
+            //displays array after delete
             cont = ``
-
             for (i = 0; i < companies.length; i++) {
 
                 cont += `
