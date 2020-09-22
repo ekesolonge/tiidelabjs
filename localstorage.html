@@ -213,7 +213,11 @@
                 "phone": document.getElementById('phone').value,
                 "pics": document.getElementById('pics').value
             }
-            users.push(newObj)
+
+            if (!fullName || !email || !phone || !pics) {
+
+                users.push(newObj)
+            }
 
             // Adds it to local storage
             localStorage.setItem("users", JSON.stringify(users))
