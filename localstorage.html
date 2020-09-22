@@ -174,16 +174,16 @@
         <h1>Welcome to the Users Page</h1>
         <div class="form">
             <div class="form-input">
-                <input type="text" id="fullName" placeholder="Enter Full Name">
+                <input type="text" id="fullName" placeholder="Enter Full Name" required>
             </div>
             <div class="form-input">
-                <input type="text" id="email" placeholder="Enter Email Address">
+                <input type="text" id="email" placeholder="Enter Email Address" required>
             </div>
             <div class="form-input">
-                <input type="text" id="phone" placeholder="Enter Your Phone Number">
+                <input type="text" id="phone" placeholder="Enter Your Phone Number" required>
             </div>
             <div class="form-input">
-                <input type="text" id="pics" placeholder="Enter Image URL">
+                <input type="text" id="pics" placeholder="Enter Image URL" required>
             </div>
             <div class="form-input">
                 <button class="addBtn">Add User</button>
@@ -214,8 +214,7 @@
                 "pics": document.getElementById('pics').value
             }
 
-            if (!fullName || !email || !phone || !pics) {
-
+            if (newObj.fullName != "" && newObj.email != "" && newObj.phone != "" && newObj.pics != "") {
                 users.push(newObj)
             }
 
