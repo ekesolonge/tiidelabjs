@@ -55,6 +55,12 @@
             width: 100%;
         }
 
+        main .form .form-input:nth-of-type(6) {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+
         main .form .form-input input {
             padding: .5rem;
             margin: .5rem;
@@ -64,9 +70,9 @@
         }
 
         main .form .form-input button {
-            display: block;
-            width: 50%;
+            width: 20%;
             margin: 1rem auto;
+            padding: 0.8rem;
         }
 
         /* Button Styling */
@@ -105,6 +111,15 @@
 
         .editBtn:hover {
             background: rgb(0, 54, 134);
+        }
+
+        .updateBtn {
+            background: rgb(110, 8, 110);
+            color: white;
+        }
+
+        .updateBtn:hover {
+            background: rgb(145, 4, 145);
         }
 
         /* Profile Styling */
@@ -174,19 +189,23 @@
         <h1>Welcome to the Users Page</h1>
         <div class="form">
             <div class="form-input">
-                <input type="text" id="fullName" placeholder="Enter Full Name" required>
+                <input type="hidden" id="index" placeholder="Index">
             </div>
             <div class="form-input">
-                <input type="text" id="email" placeholder="Enter Email Address" required>
+                <input type="text" id="fullName" placeholder="Enter Full Name">
             </div>
             <div class="form-input">
-                <input type="text" id="phone" placeholder="Enter Your Phone Number" required>
+                <input type="text" id="email" placeholder="Enter Email Address">
             </div>
             <div class="form-input">
-                <input type="text" id="pics" placeholder="Enter Image URL" required>
+                <input type="text" id="phone" placeholder="Enter Your Phone Number">
+            </div>
+            <div class="form-input">
+                <input type="file" id="pics">
             </div>
             <div class="form-input">
                 <button class="addBtn">Add User</button>
+                <button class="updateBtn" onclick="update()">Update</button>
             </div>
         </div>
 
@@ -211,12 +230,9 @@
                 "fullName": document.getElementById('fullName').value,
                 "email": document.getElementById('email').value,
                 "phone": document.getElementById('phone').value,
-                "pics": document.getElementById('pics').value
+                "pics": document.getElementById('pics').value.split("\\")[2]
             }
-
-            if (newObj.fullName != "" && newObj.email != "" && newObj.phone != "" && newObj.pics != "") {
-                users.push(newObj)
-            }
+            users.push(newObj)
 
             // Adds it to local storage
             localStorage.setItem("users", JSON.stringify(users))
@@ -267,18 +283,31 @@
 
         // Function to Edit
         function edit(id) {
-            editUser = {
-                "fullName": prompt('Enter Your Full Name:', users[id].fullName),
-                "email": prompt('Enter Your Email Address:', users[id].email),
-                "phone": Number(prompt('Enter Your Phone Number:', users[id].phone)),
-                "pics": prompt('Enter Image url:', users[id].pics)
-            }
-            if (editUser.pics != null && editUser.fullName != null && editUser.email != null && editUser.phone != null) {
-                users[id] = editUser
+            editUser = users[id]
+            document.getElementById("fullName").value = editUser.fullName
+            document.getElementById("email").value = editUser.email
+            document.getElementById("phone").value = editUser.phone
+            document.getElementById('pics').value.split("\\")[2] = editUser.pics
+            document.getElementById("index").value = id
+        }
 
-                localStorage.setItem("users", JSON.stringify(users))
+        // Function to Update
+        function update() {
+            i = document.getElementById("index").value
+
+            let updatedRecord =
+            {
+                "fullName": document.getElementById("fullName").value,
+                "email": document.getElementById("email").value,
+                "phone": document.getElementById("phone").value,
+                "pics": document.getElementById('pics').value.split("\\")[2]
+
             }
+            users[i] = updatedRecord
+            localStorage.setItem("users", JSON.stringify(users))
             display()
+
+
         }
 
     </script>
