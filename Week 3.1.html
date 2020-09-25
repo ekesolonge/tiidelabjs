@@ -232,7 +232,10 @@
                 "phone": document.getElementById('phone').value,
                 "pics": document.getElementById('pics').value.split("\\")[2]
             }
-            users.push(newObj)
+
+            if (newObj.fullname != "" && newObj.email != "" && newObj.phone != "" && newObj.pics != "") {
+                users.push(newObj)
+            }
 
             // Adds it to local storage
             localStorage.setItem("users", JSON.stringify(users))
@@ -313,7 +316,11 @@
             localStorage.setItem("users", JSON.stringify(users))
             display()
 
-
+            // Empty textbox
+            document.getElementById('fullName').value = ""
+            document.getElementById('email').value = ""
+            document.getElementById('phone').value = ""
+            document.getElementById('pics').value.split("\\")[2] = ""
         }
 
     </script>
