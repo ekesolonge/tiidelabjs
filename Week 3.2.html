@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users Page</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            background: linear-gradient(cornflowerblue, rgb(110, 8, 110));
+            line-height: 1.6;
+            min-height: 100vh;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        h1 {
+            color: rgb(110, 8, 110);
+            text-shadow: 1px 1px 10px blueviolet;
+            margin-bottom: 1rem;
+        }
+
+        main {
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        img {
+            border-radius: 50%;
+        }
+
+        /* Form Styling */
+        main .form {
+            width: 60%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        main .form .form-input {
+            width: 100%;
+        }
+
+        main .form .form-input input {
+            padding: .5rem;
+            margin: .5rem;
+            border-radius: 5px;
+            width: 100%;
+            border: none;
+        }
+
+        main .form .form-input button {
+            display: block;
+            width: 50%;
+            margin: 1rem auto;
+        }
+
+        /* Button Styling */
+        button {
+            border: none;
+            padding: .5rem;
+            margin: .5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 75px;
+        }
+
+        .addBtn {
+            background: green;
+            color: white;
+            margin-left: .5rem;
+        }
+
+        .addBtn:hover {
+            background: rgb(3, 87, 3);
+        }
+
+        .delBtn {
+            background: red;
+            color: white;
+        }
+
+        .delBtn:hover {
+            background: rgb(168, 0, 0);
+        }
+
+        .editBtn {
+            background: rgb(0, 102, 255);
+            color: white;
+        }
+
+        .editBtn:hover {
+            background: rgb(0, 54, 134);
+        }
+
+        /* Profile Styling */
+        #main {
+            width: 60%;
+        }
+
+        .profile {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            width: 100%;
+            background: rgba(245, 245, 245, 0.7);
+            padding: 2rem 0;
+            border-bottom: 1px solid rgb(0, 54, 134);
+            margin-bottom: 1rem;
+            border-radius: 20px;
+        }
+
+        .profile button:first-of-type {
+            margin-left: 0;
+        }
+
+        .item {
+            width: 50%;
+        }
+
+        /* Media queries */
+        @media screen and (max-width: 768px) {
+            main .form {
+                width: 70%;
+            }
+
+            #main {
+                width: 70%;
+            }
+        }
+
+        @media screen and (max-width: 550px) {
+            h1 {
+                font-size: 1.75rem;
+            }
+
+            main .form {
+                width: 90%;
+            }
+
+            #main {
+                width: 90%;
+            }
+
+            .profile {
+                padding: 1.5rem;
+            }
+
+            .item {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main>
+        <h1>Sign Up</h1>
+        <div class="form">
+            <div class="form-input">
+                <input type="text" id="username" placeholder="Username">
+            </div>
+            <div class="form-input">
+                <input type="text" id="email" placeholder="Enter Email Address">
+            </div>
+            <div class="form-input">
+                <input type="password" id="password" placeholder="Password">
+            </div>
+            <div class="form-input">
+                <input type="password" id="cpassword" placeholder="Confirm Password">
+            </div>
+            <div class="form-input">
+                <button class="addBtn">Sign Up</button>
+            </div>
+        </div>
+
+        <h1>Sign In</h1>
+        <div class="form">
+            <div class="form-input">
+                <input type="text" id="loginUsername" placeholder="Username">
+            </div>
+            <div class="form-input">
+                <input type="password" id="loginPassword" placeholder="Password">
+            </div>
+            <div class="form-input">
+                <button class="login">Login</button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Get from storage
+        users = JSON.parse(localStorage.getItem("internalUsers"))
+
+        // Creates new storage if none exists
+        if (users == null) {
+            users = []
+        }
+
+        // Click event to add more users
+        document.querySelector('.addBtn').addEventListener('click', () => {
+
+            password = document.getElementById('password').value
+            cpassword = document.getElementById('cpassword').value
+
+            if (password == cpassword) {
+                newObj = {
+                    "username": document.getElementById('username').value,
+                    "email": document.getElementById('email').value,
+                    "password": document.getElementById('password').value
+                }
+            }
+            else {
+                alert("Password Mismatch")
+            }
+
+            if (newObj.users != "" && newObj.email != "" && newObj.password != "" && newObj.cpassword != "") {
+                users.push(newObj)
+            }
+
+            // Adds it to local storage
+            localStorage.setItem("internalUsers", JSON.stringify(users))
+        })
+
+        // Click event to add more users
+        document.querySelector('.login').addEventListener('click', () => {
+            isUserExist = users.find(element => element.username == document.getElementById('loginUsername').value)
+
+            isPasswordExist = users.find(element => element.password == document.getElementById('loginPassword').value)
+
+            if (isPasswordExist == undefined || isUserExist == undefined) {
+                alert("Record not found")
+            } else {
+                alert("Congrats")
+                location.assign('./localstorage.html')
+            }
+        })
+    </script>
+</body>
+
+</html>
