@@ -238,6 +238,12 @@
             localStorage.setItem("users", JSON.stringify(users))
 
             display()
+
+            // Empty textbox
+            document.getElementById('fullName').value = ""
+            document.getElementById('email').value = ""
+            document.getElementById('phone').value = ""
+            document.getElementById('pics').value.split("\\")[2] = ""
         })
 
         // Display Content in HTML

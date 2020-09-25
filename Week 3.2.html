@@ -234,6 +234,12 @@
 
             // Adds it to local storage
             localStorage.setItem("internalUsers", JSON.stringify(users))
+
+            // Empty textbox
+            document.getElementById('cpassword').value = ""
+            document.getElementById('username').value = ""
+            document.getElementById('email').value = ""
+            document.getElementById('password').value = ""
         })
 
         // Click event to add more users
@@ -246,7 +252,7 @@
                 alert("Record not found")
             } else {
                 alert("Congrats")
-                location.assign('./localstorage.html')
+                location.assign('./Week 3.1.html')
             }
         })
     </script>
