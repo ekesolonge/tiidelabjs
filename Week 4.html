@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users Page</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+        * {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            background: linear-gradient(cornflowerblue, rgb(110, 8, 110));
+            line-height: 1.6;
+            min-height: 100vh;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        h1 {
+            color: rgb(110, 8, 110);
+            text-shadow: 1px 1px 10px blueviolet;
+            margin-bottom: 1rem;
+        }
+
+        main {
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        img {
+            border-radius: 50%;
+        }
+
+        /* Form Styling */
+        main .form {
+            width: 60%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        main .form .form-input {
+            width: 100%;
+        }
+
+        main .form .form-input:nth-of-type(6) {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+
+        main .form .form-input input {
+            padding: .5rem;
+            margin: .5rem;
+            border-radius: 5px;
+            width: 100%;
+            border: none;
+        }
+
+        main .form .form-input:nth-of-type(7) {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        main .form .form-input button {
+            width: 20%;
+            margin: 1rem auto;
+            padding: 0.8rem;
+        }
+
+        /* Button Styling */
+        button {
+            border: none;
+            padding: .5rem;
+            margin: .5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 75px;
+        }
+
+        .addBtn {
+            background: green;
+            color: white;
+            margin-left: .5rem;
+        }
+
+        .addBtn:hover {
+            background: rgb(3, 87, 3);
+        }
+
+        .delBtn {
+            background: red;
+            color: white;
+        }
+
+        .delBtn:hover {
+            background: rgb(168, 0, 0);
+        }
+
+        .editBtn {
+            background: rgb(0, 102, 255);
+            color: white;
+        }
+
+        .editBtn:hover {
+            background: rgb(0, 54, 134);
+        }
+
+        .updateBtn {
+            background: rgb(110, 8, 110);
+            color: white;
+        }
+
+        .updateBtn:hover {
+            background: rgb(145, 4, 145);
+        }
+
+        .searchBtn {
+            padding: 0.6rem !important;
+            margin-right: 5px !important;
+        }
+
+        .cancel {
+            display: none;
+        }
+
+        /* Profile Styling */
+        #main {
+            width: 60%;
+        }
+
+        .profile {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            width: 100%;
+            background: rgba(245, 245, 245, 0.7);
+            padding: 2rem 0;
+            border-bottom: 1px solid rgb(0, 54, 134);
+            margin-bottom: 1rem;
+            border-radius: 20px;
+        }
+
+        .profile button:first-of-type {
+            margin-left: 0;
+        }
+
+        .item {
+            width: 50%;
+        }
+
+        /* Media queries */
+        @media screen and (max-width: 768px) {
+            main .form {
+                width: 70%;
+            }
+
+            #main {
+                width: 70%;
+            }
+        }
+
+        @media screen and (max-width: 550px) {
+            h1 {
+                font-size: 1.75rem;
+            }
+
+            main .form {
+                width: 90%;
+            }
+
+            #main {
+                width: 90%;
+            }
+
+            .profile {
+                padding: 1.5rem;
+            }
+
+            .item {
+                width: 100%;
+            }
+
+            main .form .form-input button {
+                width: 40%;
+                margin: 1rem auto;
+                padding: 0.8rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main>
+        <h1>Welcome to the Users Page</h1>
+        <div class="form">
+            <div class="form-input">
+                <input type="hidden" id="index" placeholder="Index">
+            </div>
+            <div class="form-input">
+                <input type="text" id="fullName" placeholder="Enter Full Name">
+            </div>
+            <div class="form-input">
+                <input type="text" id="email" placeholder="Enter Email Address">
+            </div>
+            <div class="form-input">
+                <input type="text" id="phone" placeholder="Enter Your Phone Number">
+            </div>
+            <div class="form-input">
+                <input type="file" id="pics">
+            </div>
+            <div class="form-input">
+                <button class="addBtn">Add User</button>
+                <button class="updateBtn" onclick="update()">Update</button>
+            </div>
+            <div class="form-input">
+                <input type="text" id="search" placeholder="Search Users">
+                <button class="searchBtn" onclick="search()">Search</button>
+                <button class="searchBtn cancel" onclick="cancelSearch()">Cancel</button>
+            </div>
+            <p id="searchResult"></p>
+        </div>
+
+        <h1 style="margin-top: 1.5rem;">Users</h1>
+        <div id="main">
+            <!-- Where content is appended -->
+        </div>
+    </main>
+
+    <script>
+        // Get from local storage
+        users = JSON.parse(localStorage.getItem("users"))
+
+        originalUsers = JSON.parse(localStorage.getItem("users"))
+
+        // Creates new storage if none exists
+        if (users == null) {
+            users = []
+        }
+
+        // Click event to add more users
+        document.querySelector('.addBtn').addEventListener('click', () => {
+            newObj = {
+                "fullName": document.getElementById('fullName').value,
+                "email": document.getElementById('email').value,
+                "phone": document.getElementById('phone').value,
+                "pics": document.getElementById('pics').value.split("\\")[2]
+            }
+
+            if (newObj.fullName != "" && newObj.email != "" && newObj.phone != "" && newObj.pics != "") {
+                users.push(newObj)
+
+                // Empty textbox
+                document.getElementById('fullName').value = ""
+                document.getElementById('email').value = ""
+                document.getElementById('phone').value = ""
+                document.getElementById('pics').value.split("\\")[2] = ""
+            }
+
+            // Adds it to local storage
+            localStorage.setItem("users", JSON.stringify(users))
+
+            display()
+        })
+
+        // Display Content in HTML
+        function display() {
+            cont = '';
+
+            for (i = 0; i < users.length; i++) {
+                cont += `
+            <div class="profile"> 
+            <div class="item">               
+            <img src= "${users[i].pics}" style= "max-height: 100px"><br>
+            </div>
+            <div class="item">
+            <strong>Full Name</strong> : ${users[i].fullName}<br>
+            </div>
+            <div class="item">
+            <strong>Email</strong> : ${users[i].email}<br>
+            </div>
+            <div class="item">
+            <strong>Phone</strong> : ${users[i].phone}<br>
+            </div>
+            <div class="item">
+            <button class = "delBtn" onclick="del(${i})">Delete</button>
+            <button class = "editBtn" onclick="edit(${i})">Edit</button>
+            </div>
+         </div>`
+            }
+            document.getElementById("main").innerHTML = cont;
+        }
+
+        display()
+
+        // Function to Delete
+        function del(id) {
+            originalIndex = originalUsers.findIndex(x => x.fullName == users[id].fullName)
+
+            con = confirm(`Are you sure you want to delete ${users[id].fullName}?`)
+            if (con == true) {
+                originalUsers.splice(originalIndex, 1);
+
+                users = originalUsers
+                localStorage.setItem("users", JSON.stringify(originalUsers))
+                display()
+            }
+        }
+
+        // Function to Edit
+        function edit(id) {
+            editUser = users[id]
+            originalIndex = originalUsers.findIndex(x => x.fullName == editUser.fullName)
+            document.getElementById("fullName").value = editUser.fullName
+            document.getElementById("email").value = editUser.email
+            document.getElementById("phone").value = editUser.phone
+            document.getElementById('pics').value.split("\\")[2] = editUser.pics
+            document.getElementById("index").value = originalIndex
+        }
+
+        // Function to Update
+        function update() {
+            i = document.getElementById("index").value
+
+            let updatedRecord =
+            {
+                "fullName": document.getElementById("fullName").value,
+                "email": document.getElementById("email").value,
+                "phone": document.getElementById("phone").value,
+                "pics": document.getElementById('pics').value.split("\\")[2]
+
+            }
+            originalUsers[i] = updatedRecord
+            users = originalUsers
+            localStorage.setItem("users", JSON.stringify(originalUsers))
+            display()
+
+            // Empty textbox
+            document.getElementById('fullName').value = ""
+            document.getElementById('email').value = ""
+            document.getElementById('phone').value = ""
+            document.getElementById('pics').value.split("\\")[2] = ""
+        }
+
+
+        // Search
+        function search() {
+            // Search box
+            param = document.getElementById('search').value.toLowerCase()
+
+            // Filter
+            users = users.filter(element => element.fullName.toLowerCase().includes(param))
+
+            if (users == null || users == undefined || users.length == 0) {
+                alert("No record found for " + param)
+            } else {
+                display()
+            }
+
+            users.length == 1 ? document.getElementById('searchResult').innerHTML = users.length + " record found" : document.getElementById('searchResult').innerHTML = users.length + " records found"
+
+            // display cancel button
+            document.querySelector('.cancel').style.display = "block"
+        }
+
+        // Cancel Search
+        function cancelSearch() {
+
+            // Get from local storage
+            users = JSON.parse(localStorage.getItem("users"))
+
+            // Display Content in HTML
+            display()
+
+            // hide cancel button
+            document.querySelector('.cancel').style.display = "none"
+
+            // Empty text boxes
+            document.getElementById('search').value = ""
+            document.getElementById('searchResult').innerHTML = ""
+        }
+    </script>
+</body>
+
+</html>
