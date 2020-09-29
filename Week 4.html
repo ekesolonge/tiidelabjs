@@ -266,10 +266,7 @@
                 users.push(newObj)
 
                 // Empty textbox
-                document.getElementById('fullName').value = ""
-                document.getElementById('email').value = ""
-                document.getElementById('phone').value = ""
-                document.getElementById('pics').value.split("\\")[2] = ""
+                empty()
             }
 
             // Adds it to local storage
@@ -351,10 +348,7 @@
             display()
 
             // Empty textbox
-            document.getElementById('fullName').value = ""
-            document.getElementById('email').value = ""
-            document.getElementById('phone').value = ""
-            document.getElementById('pics').value.split("\\")[2] = ""
+            empty()
         }
 
 
@@ -390,9 +384,17 @@
             // hide cancel button
             document.querySelector('.cancel').style.display = "none"
 
-            // Empty text boxes
+            // Empty search box
             document.getElementById('search').value = ""
             document.getElementById('searchResult').innerHTML = ""
+        }
+
+        // Empty text boxes
+        function empty() {
+            document.getElementById('fullName').value = ""
+            document.getElementById('email').value = ""
+            document.getElementById('phone').value = ""
+            document.getElementById('pics').value.split("\\")[2] = ""
         }
     </script>
 </body>
