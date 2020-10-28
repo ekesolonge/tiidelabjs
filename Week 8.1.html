@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promise Video</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
+    <style>
+        body {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+            background: rgb(4, 24, 88);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        video {
+            width: 1000px;
+            height: 768px;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        createVideo('https://content.videvo.net/videvo_files/video/free/2014-12/originalContent/Orchestral_Cymbal_Mid_Shot_Roll.mp4')
+
+        async function createVideo(audioSource) {
+
+            // Create audio and source
+            let audio = document.createElement('video')
+            let source = document.createElement('source')
+
+            // Set attributes
+            audio.setAttribute('controls', 'controls')
+            audio.setAttribute('id', 'audio')
+
+            // Add src
+            source.src = audioSource
+            source.type = "audio/mpeg"
+            audio.appendChild(source)
+
+            audio.onload = await audio
+
+            document.body.append(audio)
+
+            var audios = document.getElementById('audio')
+            const play = await audios.play()
+        }
+    </script>
+</body>
+
+</html>
